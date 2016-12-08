@@ -1,0 +1,6 @@
+C:\Users\RoseMR24\Documents\Lemonade\LemonadeStand\bin\Debug\LemonadeStand.exe.config
+C:\Users\RoseMR24\Documents\Lemonade\LemonadeStand\obj\Debug\LemonadeStand.csprojResolveAssemblyReference.cache
+C:\Users\RoseMR24\Documents\Lemonade\LemonadeStand\bin\Debug\LemonadeStand.exe
+C:\Users\RoseMR24\Documents\Lemonade\LemonadeStand\bin\Debug\LemonadeStand.pdb
+C:\Users\RoseMR24\Documents\Lemonade\LemonadeStand\obj\Debug\LemonadeStand.exe
+C:\Users\RoseMR24\Documents\Lemonade\LemonadeStand\obj\Debug\LemonadeStand.pdb
