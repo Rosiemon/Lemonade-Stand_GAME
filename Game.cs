@@ -8,145 +8,228 @@ namespace LemonadeStand
 {
     public class Game
     {
-        Player player;
         Store store;
         Inventory inventory;
         Report report;
+        Wallet wallet;
+        Customer customer;
         List<Customer> customers;
-        Customer customer = new Customer();
         public int numberOfPlayers;
         public int daysToPlay;
         public int currentDay;
-
         public Game()
         {
-            player = new Player();
+            wallet = new Wallet();
+            report = new Report();
+            store = new Store();
             inventory = new Inventory();
             report = new Report();
-            Customer customer = new Customer();
+            customer = new Customer();
             currentDay = 1;
         }
         public void RunGame()
         {
             Welcome();
-            GetPlayerName();
-            ChooseDays();
+            AskForRules();
+            GetPlayers();
+            GetPlayersName();
+            ChooseDaysToPlay();
             DisplayMenu();
         }
-        public void StartDay() // everything in here needs to be in a loop for as many days as they choose
+        public void StartDay()
         {
-            while (currentDay <= daysToPlay)
-            {
-                DisplayCurrentDay();
-                inventory.DisplayInventory();
-                store.BuyFromStore();
-                inventory.DisplayRecipe();
-                inventory.SetPrice();
-                customer.RandomizeCustomers();
-                DisplayCustomers();
-                report.DisplayDailyReport(currentDay);
-            }
-            EndGame();
+            DisplayCurrentDay();
+            customer.RandomizeCustomers();
+            DisplayCustomers();
+            report.DisplayDailyReport(currentDay);
+            //EndDay();
         }
         public void Welcome()
         {
-            Console.WriteLine("                     What do you get when life throws you lemons? \n");
+            Console.WriteLine("\n                               WHAT DO YOU GET WHEN LIFE THROWS YOU LEMONS ??? \n");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("                               |||||| LEMONADE |||||| \n");
+            Console.WriteLine("||||| L E M O N A D E ||||| L E M O N A D E ||||| L E M O N A D E ||||| L E M O N A D E ||||| L E M O N A D E ||||| \n");
             Console.ResetColor();
-            Console.ReadLine();
+   
         }
-        public void GetPlayerName()
+        public void AskForRules()
         {
-            Console.WriteLine("Please enter your name . . .");
-            string players = Console.ReadLine();
-        }
-        public void ChooseDays()
-        {
-            Console.WriteLine("How many days would you like to play? Please enter [1-10]");
-            string numberOfDaysToPlay = Console.ReadLine();
-            switch (numberOfDaysToPlay)
+            Console.WriteLine("WOULD YOU LIKE TO SEE THE RULES?");
+            Console.WriteLine("SELECT [1] YES");
+            Console.WriteLine("SELECT [2] NO \n");
+            string input = Console.ReadLine().ToLower();
+            if (input == "1" || input == "y")
             {
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                case "9":
-                case "10":
-                    Console.WriteLine("You are set to play {0} days!", numberOfDaysToPlay);
-                    daysToPlay = Convert.ToInt32(numberOfDaysToPlay);
-                    break;
-                default:
-                    Console.WriteLine("INVALID INPUT \nPlease enter a number between [1-10]");
-                    ChooseDays();
-                    break;
+                DisplayRules();
             }
-        }
-        public void DisplayMenu() //I dont think I need to keep number 7 for the first display before they choose start game
-        {
-            Console.WriteLine("Please choose a menu option : \n"); 
-            Console.WriteLine("Select [1] to display the rules");
-            Console.WriteLine("Select [2] to start the game");
-            Console.WriteLine("Select [3] to buy from the store");
-            Console.WriteLine("Select [4] to view your inventory");
-            Console.WriteLine("Select [5] to create your recipe");
-            Console.WriteLine("Select [6] to change the price of your lemonade");
-            Console.WriteLine("Select [7] to end the game");
-            string userImput = Console.ReadLine();
-
-            if (userImput == "1")
+            else if (input == "2" || input == "n")
             {
-                Rules rules = new Rules();
-                rules.ShowRules();
-            }
-            else if (userImput == "2")
-            {
-                StartDay();
-            }
-            else if (userImput == "3")
-            {
-                Store store = new Store();
-                store.BuyFromStore();
-            }
-            else if (userImput == "4")
-            {
-                Inventory inventory = new Inventory();
-                inventory.DisplayInventory();
-            }
-            else if (userImput == "5")
-            {
-                Inventory inventory = new Inventory();
-                inventory.DisplayRecipe();
-            }
-            else if (userImput == "6")
-            {
-                Inventory inventory = new Inventory();
-                inventory.SetPrice();
-            }
-            else if (userImput == "7")
-            {
-                EndGame();
+                Console.WriteLine("OKAY . . . NO RULES FOR YOU! \n  press any key to continue . . . \n");
+                Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("INVALID INPUT");
-                DisplayMenu();
+                Console.WriteLine("\nINVALID INPUT \n");
+                AskForRules();
             }
+        }
+        public void DisplayRules()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("\nIt's going to be tough to make it in this business!");
+            Console.WriteLine("Keep track of your inventory and cash balance then create your recipe and set the price of your lemonade. \nThe weather will have an affect on how many customers stop by. \n");
+            Console.WriteLine("It looks like all you have is [20 bucks] to get started with . . . that'll be fine just manage your cash wisley! \n"); Console.ResetColor();
+            Console.WriteLine("What are you waiting for????"); Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("         $ $ $ $ $ $    G O   M A K E   S O M E   M O N E Y    $ $ $ $ $ $ \n"); Console.ResetColor();
+        }
+        public void GetPlayers()
+        {
+            bool chosen = false;
+            while (!chosen)
+            {
+                Console.WriteLine("HOW MANY PLAYERS WOULD LIKE TO PLAY???? [ 1 - 4 ] \n");
+                string players = Console.ReadLine();
+                switch (players)
+                {
+                    case "1":
+                    case "2":
+                    case "3":
+                    case "4":
+                        Console.WriteLine("SETTING GAME TO {0} PLAYER(S). \n", players);
+                        chosen = true;
+                        numberOfPlayers = Convert.ToInt32(players);
+                        break;
+                    default:
+                        Console.WriteLine("INVALID INPUT \n");
+                        break;
+                }
+            }
+        }
+        public void GetPlayersName()
+        {
+            Player[] PlayerNames = new Player[numberOfPlayers];
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                PlayerNames[i] = new Player();
+                Console.WriteLine("Player {0}, what is your name? \n", i + 1);
+                PlayerNames[i].Name = Console.ReadLine();
+                if (PlayerNames[i].Name.Equals(""))
+                {
+                    Console.WriteLine("\nINVALID INPUT \n");
+                    GetPlayersName();
+                }
+            }
+        }
+        //public void ChooseDaysToPlay()
+        //{
+        //    Console.WriteLine("How many days would you like to play? Please enter a number [ 1 - 10 ] \n");
+        //    int daysToPlay = Int32.Parse(Console.ReadLine());
+        //    if (daysToPlay == 1 || daysToPlay == 2 || daysToPlay == 3 || daysToPlay == 4 || daysToPlay == 5 || daysToPlay == 6 || daysToPlay == 7 || daysToPlay == 8 || daysToPlay == 9 || daysToPlay == 10)
+        //    {
+        //        Console.WriteLine($"You are set to play {daysToPlay} days!");
+        //    }   
+        //    else
+        //    {
+        //        Console.WriteLine("INVALID INPUT \n");
+        //        ChooseDaysToPlay();
+        //    }
+        //}
+        public void ChooseDaysToPlay()
+        { 
+            Console.WriteLine("\nHow many days would you like to play? Please enter a number [ 1 - 10 ] \n");
+            try
+            {
+                daysToPlay = Int32.Parse(Console.ReadLine());
+                switch (daysToPlay)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                        Console.WriteLine($"You are set to play {daysToPlay} days! \n");
+                        Console.WriteLine("Okay . . . . \nREADY \nSET \nGO! \n");
+                        break;
+                    default:
+                        Console.WriteLine("INVALID INPUT \n");
+                        ChooseDaysToPlay();
+                        break;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("INVALID INPUT \n");
+                ChooseDaysToPlay();
+            }
+        }
+        public void DisplayMenu()
+        {
+            while (currentDay <= daysToPlay)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("PLEASE CHOOSE A MENU OPTION : \n");
+                Console.WriteLine("Select [1] START DAY         Select [2] Cash Balance     Select [3] Inventory");
+                Console.WriteLine("Select [4] Buy Supplies      Select [5] Create Recipe    Select [6] Set Price");
+                Console.WriteLine("Select [7] QUIT"); Console.ResetColor();
+                string userImput = Console.ReadLine();
+                switch (userImput)
+                {
+                    case "1":
+                        StartDay();
+                        break;
+                    case "2":
+                        wallet.DisplayWallet();
+                        break;
+                    case "3":
+                        inventory.DisplayInventory();
+                        break;
+                    case "4":
+                        store.BuyFromStore();
+                        break;
+                    case "5":
+                        inventory.DisplayRecipe();
+                        break;
+                    case "6":
+                        inventory.SetPrice();
+                        break;
+                    case "7":
+                        Console.WriteLine("ARE YOU SURE YOU WANT TO QUIT ???  \nSELECT [1] YES \nSELECT [2] NO \n");
+                        string input = Console.ReadLine().ToUpper();
+                        switch (input)
+                        {
+                            case "1":
+                            case "y":
+                            case "yes":
+                                EndGame();
+                                break;
+                            case "2":
+                            case "n":
+                            case "no":
+                                Console.WriteLine("Okay . . .   Continue . . .");
+                                DisplayMenu();
+                                break;
+                            default:
+                                Console.WriteLine("INVALID INPUT \n");
+                                break;
+                        }
+                        break;
+                }
+            }
+            EndGame();
+        }
+        public int DisplayCurrentDay()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"---------- D A Y {currentDay} ---------- \n"); Console.ResetColor();
+            return currentDay;
         }
         public int AddDay()
         {
             currentDay += 1;
             return currentDay;
         }
-        public int DisplayCurrentDay()
-        {
-            return currentDay;
-        }
-        public Customer MakeCustomer()
+        public Customer CreateCustomer()
         {
             Customer customer = new Customer();
             customer.RandomizeCustomers();
@@ -161,7 +244,7 @@ namespace LemonadeStand
         }
         public void EndGame()
         {
-            Console.WriteLine("Would you like to play again?");
+            Console.WriteLine("Would you like to play again? \n");
             string userInput = Console.ReadLine().ToLower();
             if (userInput == "y" || userInput == "yes")
             {
@@ -169,8 +252,8 @@ namespace LemonadeStand
             }
             else if (userInput == "n" || userInput == "no")
             {
-                Console.WriteLine("GOODBYE. HAVE A NICE DAY!");
-                Console.ReadKey();
+                Console.WriteLine("Sorry to see you go . . . no more money making for you . . .");
+                Console.ReadKey(); Environment.Exit(0);
             }
             else
             {

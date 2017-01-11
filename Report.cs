@@ -8,21 +8,25 @@ namespace LemonadeStand
 {
     class Report
     {
-        Wallet wallet = new Wallet();
+        Wallet wallet;
+        public Report()
+        {
+            wallet = new Wallet();
+        }
         public void DisplayDailyReport(int currentDay)
         {
-            Console.WriteLine("||||||||||| SALES REPORT FOR THE DAY ||||||||||");
+            Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("||||||||||| SALES REPORT FOR THE DAY ||||||||||");
             Console.Write("Day : {0}     ", currentDay);
             Console.WriteLine("Date : {0}", DateTime.Today);
             Console.WriteLine("Expenses : {0}", wallet.moneySpentToday);
-            Console.WriteLine("Profit   : {0} \n", wallet.moneyEarnedToday);
+            Console.WriteLine("Profit   : {0} \n", wallet.moneyEarnedToday); Console.ResetColor();
             DisplayTotalReport();
         }
         public void DisplayTotalReport()
         {
-            Console.WriteLine("||||||||||| RUNNING SALES REPORT ||||||||||");
+            Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("||||||||||| RUNNING SALES REPORT ||||||||||");
             Console.WriteLine("TOTAL Business Expenses : {0}", wallet.totalMoneySpent);
-            Console.WriteLine("TOTAL Business Profits  : {0} \n", wallet.totalMoneyEarned);
+            Console.WriteLine("TOTAL Business Profits  : {0} \n", wallet.totalMoneyEarned); Console.ResetColor();
         }
     }
 }

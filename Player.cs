@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Player
+    public class Player
     {
         public string Name;
-        public int numberOfPlayers;
-
-        public Player()
+        public void GetName()
         {
-            numberOfPlayers = 0;
+            Console.WriteLine("\nPLEASE ENTER YOUR NAME \n");
+            Name = Console.ReadLine().ToUpper();
+            if (Name.Equals(""))
+            {
+                Console.WriteLine("\nINVALID INPUT \n");
+                GetName();
+            }
         }
     }
 }

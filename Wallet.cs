@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Wallet
+    public class Wallet
     {
         public double moneyInWallet;
         public double moneySpentToday;
@@ -20,7 +20,7 @@ namespace LemonadeStand
         }
         public double DisplayWallet()
         {
-            Console.WriteLine("You currently have ${0} in your wallet", moneyInWallet);
+            Console.WriteLine($"You currently have ${moneyInWallet} in your wallet");
             return moneyInWallet;
         }
         public void CalculateBoughtLemons(double costOfItems, double pricePerLemon, int buyingLemons)
@@ -67,8 +67,15 @@ namespace LemonadeStand
             return totalMoneyEarned;
         }
 
-        //////// public void ResetDailyExpense()
+        /////////////////////////////////////////////////////////////// GET THIS DONE
 
-        //////// public void ResetDailyProfit()
+        public void ResetDailyExpense()
+        {
+
+        }
+        public void ResetDailyProfit()
+        {
+
+        }
     }
 }
