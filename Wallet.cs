@@ -20,7 +20,7 @@ namespace LemonadeStand
         }
         public double DisplayWallet()
         {
-            Console.WriteLine($"You currently have ${moneyInWallet} in your wallet");
+            Console.ForegroundColor = ConsoleColor.Yellow;  Console.WriteLine($"\nYou currently have ${moneyInWallet} in your wallet \n"); Console.ResetColor();
             return moneyInWallet;
         }
         public void CalculateBoughtLemons(double costOfItems, double pricePerLemon, int buyingLemons)

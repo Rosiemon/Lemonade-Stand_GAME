@@ -169,8 +169,8 @@ namespace LemonadeStand
         {
             while (currentDay <= daysToPlay)
             {
-                Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("PLEASE CHOOSE A MENU OPTION : \n");
-                Console.WriteLine("Select [1] START DAY         Select [2] Cash Balance     Select [3] Inventory");
+                Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("\nPLEASE CHOOSE A MENU OPTION : \n");
+                Console.WriteLine("Select [1] START DAY         Select [2] Sales Report     Select [3] Weather Forcast");
                 Console.WriteLine("Select [4] Buy Supplies      Select [5] Create Recipe    Select [6] Set Price");
                 Console.WriteLine("Select [7] QUIT"); Console.ResetColor();
                 string userImput = Console.ReadLine();
@@ -181,9 +181,10 @@ namespace LemonadeStand
                         break;
                     case "2":
                         wallet.DisplayWallet();
+                        report.DisplayDailyReport(currentDay);
                         break;
                     case "3":
-                        inventory.DisplayInventory();
+                        
                         break;
                     case "4":
                         store.BuyFromStore();
