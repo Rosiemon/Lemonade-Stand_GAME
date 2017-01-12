@@ -77,7 +77,7 @@ namespace LemonadeStand
         {
             Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("\nIt's going to be tough to make it in this business!");
             Console.WriteLine("Keep track of your inventory and cash balance then create your recipe and set the price of your lemonade. \nThe weather will have an affect on how many customers stop by. \n");
-            Console.WriteLine("It looks like all you have is [20 bucks] to get started with . . . that'll be fine just manage your cash wisley! \n"); Console.ResetColor();
+            Console.WriteLine("It looks like all you have is [20 bucks] to get started with . . . that'll be fine just manage your cash wisely! \n"); Console.ResetColor();
             Console.WriteLine("What are you waiting for????"); Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine("         $ $ $ $ $ $    G O   M A K E   S O M E   M O N E Y    $ $ $ $ $ $ \n"); Console.ResetColor();
         }
         public void GetPlayers()

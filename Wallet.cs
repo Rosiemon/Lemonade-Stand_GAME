@@ -23,29 +23,29 @@ namespace LemonadeStand
             Console.ForegroundColor = ConsoleColor.Yellow;  Console.WriteLine($"\nYou currently have ${moneyInWallet} in your wallet \n"); Console.ResetColor();
             return moneyInWallet;
         }
-        public void CalculateBoughtLemons(double costOfItems, double pricePerLemon, int buyingLemons)
+        public void CalculateBoughtLemons(double pricePerLemon, int boughtLemons)
         {
-            costOfItems = pricePerLemon * buyingLemons;
-            moneyInWallet = costOfItems - moneyInWallet;
-            totalMoneySpent += costOfItems;
+            double costOfLemons = pricePerLemon * boughtLemons;
+            moneyInWallet = moneyInWallet - costOfLemons;
+            totalMoneySpent += costOfLemons;
         }
-        public void CalculateBoughtSugar(double costOfItems, double pricePerSugar, int buyingSugar)
+        public void CalculateBoughtSugar(double pricePerSugar, int boughtSugar)
         {
-            costOfItems = pricePerSugar * buyingSugar;
-            moneyInWallet = costOfItems - moneyInWallet;
-            totalMoneySpent += costOfItems;
+            double costOfSugar = pricePerSugar * boughtSugar;
+            moneyInWallet = moneyInWallet - costOfSugar;
+            totalMoneySpent += costOfSugar;
         }
-        public void CalculateBoughtIce(double costOfItems, double pricePerIce, int buyingIce)
+        public void CalculateBoughtIce(double pricePerIce, int boughtIce)
         {
-            costOfItems = pricePerIce * buyingIce;
-            moneyInWallet = costOfItems - moneyInWallet;
-            totalMoneySpent += costOfItems;
+            double costOfIce = pricePerIce * boughtIce;
+            moneyInWallet = moneyInWallet - costOfIce;
+            totalMoneySpent += costOfIce;
         }
-        public void CalculateBoughtCups(double costOfItems, double pricePerCup, int buyingCups)
+        public void CalculateBoughtCups(double pricePerCup, int boughtCups)
         {
-            costOfItems = pricePerCup * buyingCups;
-            moneyInWallet = costOfItems - moneyInWallet;
-            totalMoneySpent += costOfItems;
+            double costOfCups = pricePerCup * boughtCups;
+            moneyInWallet = moneyInWallet - costOfCups;
+            totalMoneySpent += costOfCups;
         }
         public double DisplayDailyExpense()
         {

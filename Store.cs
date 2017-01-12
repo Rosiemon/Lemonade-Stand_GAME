@@ -9,17 +9,19 @@ namespace LemonadeStand
     public class Store
     {
         Wallet wallet;
+        Player player;
         public double pricePerLemon;
         public double pricePerSugar;
         public double pricePerIce;
         public double pricePerCup;
-        public double costOfItems;
-        public int buyingLemons;
-        public int buyingSugar;
-        public int buyingIce;
-        public int buyingCups;
+        public int boughtLemons;
+        public int boughtSugar;
+        public int boughtIce;
+        public int boughtCups;
         public Store()
         {
+            wallet = new Wallet();
+            player = new Player();
             pricePerLemon = 0.20;
             pricePerSugar = 0.10;
             pricePerIce = 0.05;
@@ -44,7 +46,7 @@ namespace LemonadeStand
         {
             Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("\nWhat item do you want to buy? \n");
             Console.WriteLine("Select [1] Buy Lemons");
-            Console.WriteLine("Select [2] Buy Sugar Packets");
+            Console.WriteLine("Select [2] Buy Sugar Cubes");
             Console.WriteLine("Select [3] Buy Ice Cubes");
             Console.WriteLine("Select [4] Buy Cups");
             Console.WriteLine("Select [5] EXIT"); Console.ResetColor();
@@ -68,6 +70,9 @@ namespace LemonadeStand
                     BuyItems();
                     break;
                 case "5":
+                    Console.WriteLine("press any key to continue . . .");
+                    Console.ReadKey();
+                    break;
                 default:
                     Console.WriteLine("INVALID INPUT \n");
                     BuyItems();
@@ -76,22 +81,22 @@ namespace LemonadeStand
         }
         public void BuyLemon(double moneyInWallet)
         {
-            Console.WriteLine("\nThe Price for each lemon is {0:0.00}. How many lemons do you want to buy? \n", pricePerLemon);
+            Console.WriteLine($"\nThe Price for each lemon is {pricePerLemon:0.00}. {player.Name}, how many lemons do you want to buy? \n");
             string userInput = Console.ReadLine();
-            buyingLemons = Convert.ToInt32(userInput);
-            if (buyingLemons > 0 && costOfItems <= moneyInWallet)
+            boughtLemons = Convert.ToInt32(userInput);
+            double totalAmount = boughtLemons * pricePerLemon;
+            if (boughtLemons > 0 && totalAmount <= moneyInWallet)
             {
-                Console.WriteLine("\n have bought {0} lemons for a total cost of ${1} \n", buyingLemons, costOfItems);
-                Wallet wallet = new Wallet();
-                wallet.CalculateBoughtLemons(costOfItems, pricePerLemon, buyingLemons);
+                Console.WriteLine($"\nOkay, you just bought {boughtLemons} lemons for a total of ${totalAmount} \n");
+                wallet.CalculateBoughtLemons(pricePerLemon, boughtLemons);
             }
-            else if (buyingLemons > 0 && costOfItems > moneyInWallet)
+            else if (boughtLemons > 0 && totalAmount > moneyInWallet)
             {
                 Console.WriteLine("\nOH NO! Looks like you don't have enough money! \n");
                 Console.ReadKey();
                 BuyItems();
             }
-            else if (buyingLemons <= 0)
+            else if (boughtLemons <= 0)
             {
                 Console.WriteLine("Looks like you don't want to buy any lemons \n");
                 Console.ReadKey();
@@ -106,21 +111,22 @@ namespace LemonadeStand
         }
         public void BuySugar(double moneyInWallet)
         {
-            Console.WriteLine("\nThe Price for each sugar packet is {0:0.00}. How many sugar packets do you want to buy?\n", pricePerSugar);
+            Console.WriteLine($"\nThe Price for each sugar cube is {pricePerSugar:0.00}. How many sugar cubes do you want to buy?\n");
             string userInput = Console.ReadLine();
-            buyingSugar = Convert.ToInt32(userInput);
-            if (buyingSugar > 0 && costOfItems <= moneyInWallet)
+            boughtSugar = Convert.ToInt32(userInput);
+            double totalAmount = boughtSugar * pricePerSugar;
+            if (boughtSugar > 0 && totalAmount <= moneyInWallet)
             {
-                Console.WriteLine("\nYou have bought {0} sugar packets for a total cost of ${1}\n", buyingSugar, costOfItems);
-                wallet.CalculateBoughtSugar(costOfItems, pricePerSugar, buyingSugar);
+                Console.WriteLine($"\nOkay, you just bought {boughtSugar} sugar cubes for a total cost of ${totalAmount}\n");
+                wallet.CalculateBoughtSugar(pricePerSugar, boughtSugar);
             }
-            else if (buyingSugar > 0 && costOfItems > moneyInWallet)
+            else if (boughtSugar > 0 && totalAmount > moneyInWallet)
             {
                 Console.WriteLine("\nOH NO! Looks like you don't have enough money! \n");
                 Console.ReadKey();
                 BuyItems();
             }
-            else if (buyingSugar <= 0)
+            else if (boughtSugar <= 0)
             {
                 Console.WriteLine("\nLooks like you don't want to buy any sugar \n");
                 Console.ReadKey();
@@ -135,21 +141,22 @@ namespace LemonadeStand
         }
         public void BuyIce(double moneyInWallet)
         {
-            Console.WriteLine("\nThe Price for each ice cube is {0:0.00}. How much ice cubes do you want to buy?", pricePerIce);
+            Console.WriteLine($"\nThe Price for each ice cube is {pricePerIce:0.00}. {player.Name}, how much ice cubes do you want to buy?");
             string userInput = Console.ReadLine();
-            buyingIce = Convert.ToInt32(userInput);
-            if (buyingIce > 0 && costOfItems <= moneyInWallet)
+            boughtIce = Convert.ToInt32(userInput);
+            double totalAmount = boughtIce * pricePerIce;
+            if (boughtIce > 0 && totalAmount <= moneyInWallet)
             {
-                Console.WriteLine("\nYou have bought {0} ice cubes for a total cost of ${1}", buyingIce, costOfItems);
-                wallet.CalculateBoughtIce(costOfItems, pricePerIce, buyingIce);
+                Console.WriteLine($"\nOkay, you just bought {boughtIce} ice cubes for a total cost of ${totalAmount}");
+                wallet.CalculateBoughtIce(pricePerIce, boughtIce);
             }
-            else if (buyingLemons > 0 && costOfItems > moneyInWallet)
+            else if (boughtIce > 0 && totalAmount > moneyInWallet)
             {
                 Console.WriteLine("\nOH NO! Looks like you don't have enough money! \n");
                 Console.ReadKey();
                 BuyItems();
             }
-            else if (buyingIce <= 0)
+            else if (boughtIce <= 0)
             {
                 Console.WriteLine("\nLooks like you don't want to buy any ice \n");
                 Console.ReadKey();
@@ -164,21 +171,22 @@ namespace LemonadeStand
         }
         public void BuyCups(double moneyInWallet)
         {
-            Console.WriteLine("\nThe Price for each cup is {0:0.00}. How many cups do you want to buy?", pricePerCup);
+            Console.WriteLine($"\nThe Price for each cup is {pricePerCup:0.00}. {player.Name}, how many cups do you want to buy?");
             string userInput = Console.ReadLine();
-            buyingCups = Convert.ToInt32(userInput);
-            if (buyingCups > 0 && costOfItems <= moneyInWallet)
+            boughtCups = Convert.ToInt32(userInput);
+            double totalAmount = boughtCups * pricePerCup;
+            if (boughtCups > 0 && totalAmount <= moneyInWallet)
             {
-                Console.WriteLine("\nYou have bought {0} cups for a total cost of ${1}", buyingCups, costOfItems);
-                wallet.CalculateBoughtCups(costOfItems, pricePerCup, buyingCups);
+                Console.WriteLine($"\nOkay, you just bought {boughtCups} cups for a total cost of ${totalAmount}");
+                wallet.CalculateBoughtCups(pricePerCup, boughtCups);
             }
-            else if (buyingLemons > 0 && costOfItems > moneyInWallet)
+            else if (boughtLemons > 0 && totalAmount > moneyInWallet)
             {
                 Console.WriteLine("\nOH NO! Looks like you don't have enough money! \n");
                 Console.ReadKey();
                 BuyItems();
             }
-            else if (buyingCups <= 0)
+            else if (boughtCups <= 0)
             {
                 Console.WriteLine("\nLooks like you don't want to buy any cups \n");
                 Console.ReadKey();
