@@ -31,8 +31,8 @@ namespace LemonadeStand
         {
             Console.WriteLine("You have {0} lemons", lemonStock.Count());
             Console.WriteLine("You have {0} sugar", sugarStock.Count());
-            Console.WriteLine("You have {0} cups", cupStock.Count());
             Console.WriteLine("You have {0} ice", iceStock.Count());
+            Console.WriteLine("You have {0} cups", cupStock.Count());
         }
         public void SetPrice()
         {
@@ -56,7 +56,6 @@ namespace LemonadeStand
         {
             return cupStock.Count();
         }
-
         public void AddToLemonStock()
         {
             Lemon lemon = new Lemon();
@@ -77,7 +76,6 @@ namespace LemonadeStand
             Cup cup = new Cup();
             cupStock.Add(cup);
         }
-
         public void RemoveLemonStock()
         {
             lemonStock.RemoveAt(0);
@@ -94,10 +92,6 @@ namespace LemonadeStand
         {
             cupStock.RemoveAt(0);
         }
-
-
-
-        ///////////////////  THIS IS A SECTION FOR THE RECIPE
         public void DisplayRecipe()
         {
             Console.WriteLine("In each cup of lemonade, you currently have : \n");
@@ -114,24 +108,77 @@ namespace LemonadeStand
             string userInput = Console.ReadLine();
             if (userInput == "1")
             {
-                //ChangeRecipe();
-            }   
+                ChangeRecipe();
+            }
             else if (userInput == "2")
             {
                 Console.WriteLine("Your recipe will stay the same");
-            }   
+            }
             else
             {
                 Console.WriteLine("INVALID INPUT \n");
                 QuestionRecipe();
-            } 
+            }
         }
-        //public void ChangeRecipe()
-        //{
-        //    ChangeItem("lemons");
-        //    ChangeItem("sugar");
-        //    ChangeItem("ice");
-        //}
-
+        public void ChangeRecipe()
+        {
+            ChangeLemonCount();
+            ChangeSugarCount();
+            ChangeIceCount();
+        }
+        public void ChangeLemonCount()
+        {
+            Console.WriteLine("How many lemons would you like for each cup?");
+            int lemons = Int32.Parse(Console.ReadLine());
+            if (lemons > lemonStock.Count)
+            {
+                Console.WriteLine("OH NO! Looks like you dont have enough lemons in stock . . .");
+            }
+            else if (lemons >= lemonStock.Count)
+            {
+                recipe.Add("lemons", lemons);
+            }
+            else
+            {
+                Console.WriteLine("INVALID INPUT");
+                ChangeLemonCount();
+            }
+        }
+        public void ChangeSugarCount()
+        {
+            Console.WriteLine("How many sugar cubes would you like for each cup?");
+            int sugar = Int32.Parse(Console.ReadLine());
+            if (sugar < sugarStock.Count)
+            {
+                Console.WriteLine("OH NO! Looks like you dont have enough sugar in stock . . .");
+            }
+            else if (sugar >= sugarStock.Count)
+            {
+                recipe.Add("sugar", sugar);
+            }
+            else
+            {
+                Console.WriteLine("INVALID INPUT");
+                ChangeSugarCount();
+            }
+        }
+        public void ChangeIceCount()
+        {
+            Console.WriteLine("How many ice cubes would you like for each cup?");
+            int ice = Int32.Parse(Console.ReadLine());
+            if (ice < iceStock.Count)
+            {
+                Console.WriteLine("OH NO! Looks like you dont have enough ice in stock . . .");
+            }
+            else if (ice >= iceStock.Count)
+            {
+                recipe.Add("ice", ice);
+            }
+            else
+            {
+                Console.WriteLine("INVALID INPUT");
+                ChangeIceCount();
+            }
+        }
     }
 }

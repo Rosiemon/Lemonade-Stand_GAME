@@ -42,11 +42,11 @@ namespace LemonadeStand
             customer.RandomizeCustomers();
             DisplayCustomers();
             report.DisplayDailyReport(currentDay);
-            //EndDay();
+            EndDay();
         }
         public void Welcome()
         {
-            Console.WriteLine("\n                               WHAT DO YOU GET WHEN LIFE THROWS YOU LEMONS ??? \n");
+            Console.WriteLine("\n                               WHAT DO YOU GET WHEN LIFE GIVES YOU LEMONS ??? \n");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("||||| L E M O N A D E ||||| L E M O N A D E ||||| L E M O N A D E ||||| L E M O N A D E ||||| L E M O N A D E ||||| \n");
             Console.ResetColor();
@@ -242,6 +242,11 @@ namespace LemonadeStand
             {
                 Console.WriteLine("Cusotmer Name: {0} Thirst: {1} Cash: {2}", customer.GetCustomerName(), customer.GetCustomerThirst(), customer.GetCustomerMoney());
             }
+        }
+        public void EndDay()
+        {
+            wallet.ResetDailyExpense();
+            wallet.ResetDailyProfit();
         }
         public void EndGame()
         {

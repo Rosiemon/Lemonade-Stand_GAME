@@ -66,16 +66,13 @@ namespace LemonadeStand
             totalMoneyEarned += dailyReport;
             return totalMoneyEarned;
         }
-
-        /////////////////////////////////////////////////////////////// GET THIS DONE
-
         public void ResetDailyExpense()
         {
-
+            moneySpentToday = 0;
         }
         public void ResetDailyProfit()
         {
-
+            moneyEarnedToday = 0;
         }
     }
 }
