@@ -21,8 +21,8 @@ namespace LemonadeStand
         {
             wallet = new Wallet();
             report = new Report();
-            store = new Store();
             inventory = new Inventory();
+            store = new Store(inventory);
             report = new Report();
             customer = new Customer();
             currentDay = 1;
@@ -170,32 +170,35 @@ namespace LemonadeStand
             while (currentDay <= daysToPlay)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("\nPLEASE CHOOSE A MENU OPTION : \n");
-                Console.WriteLine("Select [1] START DAY         Select [2] Sales Report     Select [3] Weather Forcast");
-                Console.WriteLine("Select [4] Buy Supplies      Select [5] Create Recipe    Select [6] Set Price");
-                Console.WriteLine("Select [7] QUIT"); Console.ResetColor();
+                Console.WriteLine("[1] Weather Forcast       [2] Buy Supplies       [3] Create Recipe");
+                Console.WriteLine("[4] Set Price             [5] Sales Report       [6] START DAY ");
+                Console.WriteLine("[7] SAVE Data             [8] QUIT"); Console.ResetColor();
                 string userImput = Console.ReadLine();
                 switch (userImput)
                 {
                     case "1":
-                        StartDay();
+                        
                         break;
                     case "2":
+                        store.BuyFromStore();
+                        break;
+                    case "3":
+                        inventory.DisplayRecipe();
+                        break;
+                    case "4":
+                        inventory.SetPrice();
+                        break;
+                    case "5":
                         wallet.DisplayWallet();
                         report.DisplayDailyReport(currentDay);
                         break;
-                    case "3":
-                        
-                        break;
-                    case "4":
-                        store.BuyFromStore();
-                        break;
-                    case "5":
-                        inventory.DisplayRecipe();
-                        break;
                     case "6":
-                        inventory.SetPrice();
+                        StartDay();
                         break;
                     case "7":
+
+                        break;
+                    case "8":
                         Console.WriteLine("ARE YOU SURE YOU WANT TO QUIT ???  \nSELECT [1] YES \nSELECT [2] NO \n");
                         string input = Console.ReadLine().ToUpper();
                         switch (input)

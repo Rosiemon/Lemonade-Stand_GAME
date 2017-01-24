@@ -13,9 +13,10 @@ namespace LemonadeStand
         int money;
         Random randomCustomer = new Random();
         Inventory inventory = new Inventory();
-        Store store = new Store();
+        Store store;
         public Customer()
         {
+            store = new Store(inventory);
             thirst = 0;
             name = "Default name";
             money = 0;

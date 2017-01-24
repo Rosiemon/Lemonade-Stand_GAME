@@ -20,7 +20,6 @@ namespace LemonadeStand
             sugarStock = new List<Sugar> { };
             iceStock = new List<Ice> { };
             cupStock = new List<Cup> { };
-
             recipe = new Dictionary<string, int>();
             recipe.Add("lemons", 1);
             recipe.Add("sugar", 1);
@@ -29,10 +28,11 @@ namespace LemonadeStand
 
         public void DisplayInventory()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("Your current Inventory: \n");
             Console.WriteLine("You have {0} lemons", lemonStock.Count());
             Console.WriteLine("You have {0} sugar", sugarStock.Count());
             Console.WriteLine("You have {0} ice", iceStock.Count());
-            Console.WriteLine("You have {0} cups", cupStock.Count());
+            Console.WriteLine("You have {0} cups \n", cupStock.Count()); Console.ResetColor();
         }
         public void SetPrice()
         {
@@ -56,25 +56,37 @@ namespace LemonadeStand
         {
             return cupStock.Count();
         }
-        public void AddToLemonStock()
+        public void AddToLemonStock(int boughtLemons)
         {
-            Lemon lemon = new Lemon();
-            lemonStock.Add(lemon);
+            for (int i = 0; i < boughtLemons; i++)
+            {
+                Lemon lemon = new Lemon();
+                lemonStock.Add(lemon);
+            }
         }
-        public void AddToSugarStock()
+        public void AddToSugarStock(int boughtSugar)
         {
-            Sugar sugar = new Sugar();
-            sugarStock.Add(sugar);
+            for (int i = 0; i < boughtSugar; i++)
+            {
+                Sugar sugar = new Sugar();
+                sugarStock.Add(sugar);
+            }
         }
-        public void AddToIceStock()
+        public void AddToIceStock(int boughtIce)
         {
-            Ice ice = new Ice();
-            iceStock.Add(ice);
+            for (int i = 0; i < boughtIce; i++)
+            {
+                Ice ice = new Ice();
+                iceStock.Add(ice);
+            }
         }
-        public void AddToCupStock()
+        public void AddToCupStock(int boughtCups)
         {
-            Cup cup = new Cup();
-            cupStock.Add(cup);
+            for (int i = 0; i < boughtCups; i++)
+            {
+                Cup cup = new Cup();
+                cupStock.Add(cup);
+            }
         }
         public void RemoveLemonStock()
         {
@@ -94,17 +106,18 @@ namespace LemonadeStand
         }
         public void DisplayRecipe()
         {
-            Console.WriteLine("In each cup of lemonade, you currently have : \n");
-            Console.WriteLine("{0} lemons.", recipe["lemons"]);
-            Console.WriteLine("{0} sugar cubes.", recipe["sugar"]);
-            Console.WriteLine("{0} ice cubes.", recipe["ice"]);
-            QuestionRecipe();
+            Console.ForegroundColor = ConsoleColor.Yellow;  Console.WriteLine("In each cup of lemonade, you currently have : \n");
+            Console.WriteLine("{0} lemons", recipe["lemons"]);
+            Console.WriteLine("{0} sugar cubes", recipe["sugar"]);
+            Console.WriteLine("{0} ice cubes \n", recipe["ice"]); Console.ResetColor();
+            DisplayInventory();
+            QuestionRecipe(); 
         }
         public void QuestionRecipe()
         {
-            Console.WriteLine("Do you want to change your recipe?");
-            Console.WriteLine("Select [1] for Yes");
-            Console.WriteLine("Select [2] for No");
+            Console.WriteLine("Do you want to change your recipe? \n");
+            Console.WriteLine("Select [1] YES");
+            Console.WriteLine("Select [2] NO");
             string userInput = Console.ReadLine();
             if (userInput == "1")
             {
@@ -112,7 +125,7 @@ namespace LemonadeStand
             }
             else if (userInput == "2")
             {
-                Console.WriteLine("Your recipe will stay the same");
+                Console.WriteLine("\nYour recipe will stay the same");
             }
             else
             {
@@ -128,55 +141,55 @@ namespace LemonadeStand
         }
         public void ChangeLemonCount()
         {
-            Console.WriteLine("How many lemons would you like for each cup?");
+            Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("How many lemons would you like for each cup?");
             int lemons = Int32.Parse(Console.ReadLine());
             if (lemons > lemonStock.Count)
             {
-                Console.WriteLine("OH NO! Looks like you dont have enough lemons in stock . . .");
+                Console.WriteLine("OH NO! Looks like you dont have enough lemons in stock . . ."); Console.ResetColor();
             }
-            else if (lemons >= lemonStock.Count)
+            else if (lemons <= lemonStock.Count)
             {
-                recipe.Add("lemons", lemons);
+                recipe.Add("lemons", lemons); Console.ResetColor();
             }
             else
             {
-                Console.WriteLine("INVALID INPUT");
+                Console.WriteLine("INVALID INPUT"); Console.ResetColor();
                 ChangeLemonCount();
             }
         }
         public void ChangeSugarCount()
         {
-            Console.WriteLine("How many sugar cubes would you like for each cup?");
+            Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("How many sugar cubes would you like for each cup?");
             int sugar = Int32.Parse(Console.ReadLine());
-            if (sugar < sugarStock.Count)
+            if (sugar > sugarStock.Count)
             {
-                Console.WriteLine("OH NO! Looks like you dont have enough sugar in stock . . .");
+                Console.WriteLine("OH NO! Looks like you dont have enough sugar in stock . . ."); Console.ResetColor();
             }
-            else if (sugar >= sugarStock.Count)
+            else if (sugar <= sugarStock.Count)
             {
-                recipe.Add("sugar", sugar);
+                recipe.Add("sugar", sugar); Console.ResetColor();
             }
             else
             {
-                Console.WriteLine("INVALID INPUT");
+                Console.WriteLine("INVALID INPUT"); Console.ResetColor();
                 ChangeSugarCount();
             }
         }
         public void ChangeIceCount()
         {
-            Console.WriteLine("How many ice cubes would you like for each cup?");
+            Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("How many ice cubes would you like for each cup?");
             int ice = Int32.Parse(Console.ReadLine());
-            if (ice < iceStock.Count)
+            if (ice > iceStock.Count)
             {
-                Console.WriteLine("OH NO! Looks like you dont have enough ice in stock . . .");
+                Console.WriteLine("OH NO! Looks like you dont have enough ice in stock . . ."); Console.ResetColor();
             }
-            else if (ice >= iceStock.Count)
+            else if (ice <= iceStock.Count)
             {
-                recipe.Add("ice", ice);
+                recipe.Add("ice", ice); Console.ResetColor();
             }
             else
             {
-                Console.WriteLine("INVALID INPUT");
+                Console.WriteLine("INVALID INPUT"); Console.ResetColor();
                 ChangeIceCount();
             }
         }

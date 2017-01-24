@@ -10,6 +10,7 @@ namespace LemonadeStand
     {
         Wallet wallet;
         Player player;
+        Inventory inventory;
         public double pricePerLemon;
         public double pricePerSugar;
         public double pricePerIce;
@@ -18,10 +19,11 @@ namespace LemonadeStand
         public int boughtSugar;
         public int boughtIce;
         public int boughtCups;
-        public Store()
+        public Store(Inventory Inventory)
         {
             wallet = new Wallet();
             player = new Player();
+            inventory = Inventory;
             pricePerLemon = 0.20;
             pricePerSugar = 0.10;
             pricePerIce = 0.05;
@@ -55,6 +57,7 @@ namespace LemonadeStand
             {
                 case "1": 
                     BuyLemon(wallet.moneyInWallet);
+                    inventory.AddToLemonStock(boughtLemons);
                     BuyItems();
                     break;
                 case "2":
@@ -119,6 +122,7 @@ namespace LemonadeStand
             {
                 Console.WriteLine($"\nOkay, you just bought {boughtSugar} sugar cubes for a total cost of ${totalAmount}\n");
                 wallet.CalculateBoughtSugar(pricePerSugar, boughtSugar);
+                inventory.AddToSugarStock(boughtSugar);
             }
             else if (boughtSugar > 0 && totalAmount > moneyInWallet)
             {
@@ -149,6 +153,7 @@ namespace LemonadeStand
             {
                 Console.WriteLine($"\nOkay, you just bought {boughtIce} ice cubes for a total cost of ${totalAmount}");
                 wallet.CalculateBoughtIce(pricePerIce, boughtIce);
+                inventory.AddToIceStock(boughtIce);
             }
             else if (boughtIce > 0 && totalAmount > moneyInWallet)
             {
@@ -179,6 +184,7 @@ namespace LemonadeStand
             {
                 Console.WriteLine($"\nOkay, you just bought {boughtCups} cups for a total cost of ${totalAmount}");
                 wallet.CalculateBoughtCups(pricePerCup, boughtCups);
+                inventory.AddToCupStock(boughtCups);
             }
             else if (boughtLemons > 0 && totalAmount > moneyInWallet)
             {
