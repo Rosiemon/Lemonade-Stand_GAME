@@ -8,72 +8,112 @@ namespace LemonadeStand
 {
     public class Weather
     {
-        int temperature;
-        int cloudiness;
-        int rainLevel;
-        Random weatherRandom = new Random();
-        public void Randomize()
+        public string overcast;
+        public int temperatureForcast;
+        public string actualTemperture;
+        public int minCloudy;
+        public int maxCloudy;
+        public int minPartlyCloudy;
+        public int maxPartlyCloudy;
+        public int minSunny;
+        public int maxSunny;
+        public int minHumid;
+        public int maxHumid;
+        public int minRainy;
+        public int maxRainy;
+        public int minStormy;
+        public int maxStormy;
+        public void RandomizeOvercast()
         {
-            temperature = 60 + weatherRandom.Next(0, 16) + weatherRandom.Next(0, 16) + weatherRandom.Next(0, 16);
-            cloudiness = weatherRandom.Next(0, 101);
-            int rainChance = weatherRandom.Next(1, 101);
-            if (rainChance < 50)
-            {
-                rainLevel = 0;
-            }
-            else
-            {
-                rainLevel = weatherRandom.Next(0, 101);
-            }
+            Random random = new Random();
+            List<string> overcastList = new List<string> { "Cloudy", "Partly Coudy", "Sunny", "Humid", "Rainy", "Stormy"};
+            overcast = overcastList[random.Next(0, 5)];
         }
-        public void DisplayTodaysWeather(List<Weather> weatherForecast)
+        public void DisplayForcast()
         {
-            Console.WriteLine("Today's weather:");
-            DisplayWeather(weatherForecast[0]);
+            RandomizeOvercast();
+            RandomizeForcast();
+            Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine($"\nTODAYS'S FORCAST: {temperatureForcast} degrees and {overcast}"); Console.ResetColor();
+
         }
-        public void WeatherReport(List<Weather> weatherForecast)
+        public void RandomizeForcast()
         {
-            for (int i = 0; i < 7; i++)
+            switch(overcast)
             {
-                Console.WriteLine("\nDay {0}'s weather:", i + 1);
-                DisplayWeather(weatherForecast[i]);
-            }
-        }
-        public void DisplayWeather(Weather weather)
-        {
-            Console.WriteLine("Temperature: {0}", weather.GetTemperature());
-            Console.WriteLine("Cloudiness: {0}", weather.GetCloudiness());
-            Console.WriteLine("Chance of Rain: {0}", weather.GetRain());
-        }
-        public void WeatherCheck(List<Weather> weatherForecast)
-        {
-            Console.WriteLine("Do you want to see a forecast for one day or one week?");
-            string weatherChoice = Console.ReadLine().ToLower();
-            switch (weatherChoice)
-            {
-                case "day":
-                    DisplayTodaysWeather(weatherForecast);
+                case "Cloudy":
+                    minCloudy = 50;
+                    maxCloudy = 65;
+                    Random cloudy = new Random();
+                    temperatureForcast = cloudy.Next(minCloudy, maxCloudy);
                     break;
-                case "week":
-                    WeatherReport(weatherForecast);
+                case "Partly Cloudy":
+                    minPartlyCloudy = 64;
+                    maxPartlyCloudy = 76;
+                    Random partlyCloudy = new Random();
+                    temperatureForcast = partlyCloudy.Next(minPartlyCloudy, maxPartlyCloudy);
                     break;
-                default:
-                    Console.WriteLine("Please enter day or week.");
-                    WeatherCheck(weatherForecast);
+                case "Sunny":
+                    minSunny = 68;
+                    maxSunny = 84;
+                    Random sunny = new Random();
+                    temperatureForcast = sunny.Next(minSunny, maxSunny);
+                    break;
+                case "Humid":
+                    minHumid = 80;
+                    maxHumid = 100;
+                    Random humid = new Random();
+                    temperatureForcast = humid.Next(minHumid, maxHumid);
+                    break;
+                case "Rainy":
+                    minRainy = 38;
+                    maxRainy = 52;
+                    Random rainy = new Random();
+                    temperatureForcast = rainy.Next(minRainy, maxRainy);
+                    break;
+                case "Stormy":
+                    minStormy = 30;
+                    maxStormy = 45;
+                    Random stormy = new Random();
+                    temperatureForcast = stormy.Next(minStormy, maxStormy);
                     break;
             }
         }
-        public int GetTemperature()
+        public void RandomizeWeather()
         {
-            return temperature;
-        }
-        public int GetCloudiness()
-        {
-            return cloudiness;
-        }
-        public int GetRain()
-        {
-            return rainLevel;
+            RandomizeForcast();
+            switch (overcast)
+            {
+                case "Cloudy":
+                    Random randomCloudy = new Random();
+                    List<string> cloudyList = new List<string> {"Cloudy", "Partly Coudy", "Sunny"};
+                    overcast = cloudyList[randomCloudy.Next(0, 2)];
+                    break;
+                case "Partly Cloudy":
+                    Random randomPartlyCloudy = new Random();
+                    List<string> partlyCloudyList = new List<string> { "Cloudy", "Partly Coudy", "Sunny"};
+                    overcast = partlyCloudyList[randomPartlyCloudy.Next(0, 2)];
+                    break;
+                case "Sunny":
+                    Random randomSunny = new Random();
+                    List<string> sunnyList = new List<string> {"Partly Coudy", "Sunny", "Humid"};
+                    overcast = sunnyList[randomSunny.Next(0, 2)];
+                    break;
+                case "Humid":
+                    Random randomHumid = new Random();
+                    List<string> humidList = new List<string> {"Sunny", "Humid"};
+                    overcast = humidList[randomHumid.Next(0, 1)];
+                    break;
+                case "Rainy":
+                    Random random = new Random();
+                    List<string> overcastList = new List<string> {"Cloudy", "Rainy", "Stormy" };
+                    overcast = overcastList[random.Next(0, 2)];
+                    break;
+                case "Stormy":
+                    Random randomStormy = new Random();
+                    List<string> stormyList = new List<string> {"Rainy", "Stormy" };
+                    overcast = stormyList[randomStormy.Next(0, 1)];
+                    break;
+            }
         }
     }
 }

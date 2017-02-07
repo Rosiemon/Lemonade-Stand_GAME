@@ -13,6 +13,7 @@ namespace LemonadeStand
         Report report;
         Wallet wallet;
         Customer customer;
+        Weather weather;
         List<Customer> customers;
         public int numberOfPlayers;
         public int daysToPlay;
@@ -25,6 +26,7 @@ namespace LemonadeStand
             store = new Store(inventory);
             report = new Report();
             customer = new Customer();
+            weather = new Weather();
             currentDay = 1;
         }
         public void RunGame()
@@ -177,7 +179,7 @@ namespace LemonadeStand
                 switch (userImput)
                 {
                     case "1":
-                        
+                        weather.DisplayForcast();
                         break;
                     case "2":
                         store.BuyFromStore();
@@ -241,7 +243,8 @@ namespace LemonadeStand
         }
         public void DisplayCustomers()
         {
-            foreach (Customer customer in customers)
+            foreach (Customer customer in 
+                customers)
             {
                 Console.WriteLine("Cusotmer Name: {0} Thirst: {1} Cash: {2}", customer.GetCustomerName(), customer.GetCustomerThirst(), customer.GetCustomerMoney());
             }

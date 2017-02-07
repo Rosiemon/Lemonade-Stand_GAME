@@ -29,38 +29,7 @@ namespace LemonadeStand
             string firstName = firstNames[randomCustomer.Next(0, 30)];
             name = firstName;
         }
-        public bool DetermineIfCustomersBuy(Inventory pricePerCup, Weather weather)
-        {
-            double costThreshold = money / 3;
-            double afterTemp = 1 + ((weather.GetTemperature() - 84.0) / 100.0);
-            costThreshold = costThreshold * afterTemp;
-            if (store.pricePerCup > costThreshold)
-            {
-                Console.WriteLine("{0} says, 'WOW! That's way too expensive.'", name);
-                return false;
-            }
-            else
-            {
-                int buyRoll = randomCustomer.Next(1, 100);
-                double cheapPrice = 1;
-                if (store.pricePerCup < money / 6)
-                {
-                    Console.WriteLine("{0} says, 'This taste great and I'll definitely come back for more'", name);
-                    cheapPrice = 1 + (money / 6);
-                }
-                if (buyRoll <= (thirst * afterTemp * cheapPrice))
-                {
-                    Console.WriteLine("{0} says, 'Thank you.'", name);
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("{0} says, 'I don't want any '\n", name);
-                    return false;
-                }
-            }
-
-        }
+        
         public string GetCustomerName()
         {
             return name;

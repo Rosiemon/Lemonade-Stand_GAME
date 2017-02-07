@@ -13,6 +13,7 @@ namespace LemonadeStand
         public List<Ice> iceStock;
         public List<Cup> cupStock;
         public Dictionary<string, int> recipe;
+        double setSellingPrice;
 
         public Inventory()
         {
@@ -37,9 +38,30 @@ namespace LemonadeStand
         public void SetPrice()
         {
             Console.WriteLine("How much do you want to sell each cup of lemonade for? \n");
-            string pricePerCup = Console.ReadLine().ToLower(); Convert.ToDouble(pricePerCup);
-            Console.WriteLine("You are selling each cup of Lemonade for : ${0:0.00}", pricePerCup);
-        }
+            string setSellingPrice = Console.ReadLine().ToLower();
+            int sellingPrice = Int32.Parse(setSellingPrice);
+            int maxLimit = 40;
+            try
+            {
+                if (sellingPrice == 0)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("In order to make a profit you need to set your price higher than $0.00"); Console.ResetColor();
+                }
+                else if (sellingPrice >= maxLimit)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("Are you just trying to make fun? \nLet's be a little bit more realistic with the price of your lemonade!"); Console.ResetColor();
+                }
+                else
+                {
+                    Console.WriteLine("Okay great! You are going to sell each cup of Lemonade for : ${0:0.00}", setSellingPrice);
+                }
+            }
+            catch
+            {
+                Console.WriteLine("you dumb. try again.");
+            }
+         }
+
         public int GetLemonCount()
         {
             return lemonStock.Count();
