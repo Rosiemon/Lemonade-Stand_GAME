@@ -23,8 +23,8 @@ namespace LemonadeStand
         }
         public void RandomizeCustomers()
         {
-            thirst = randomCustomer.Next(10, 30) + randomCustomer.Next(10, 34) + randomCustomer.Next(8, 35);
-            money = randomCustomer.Next(1, 30) + randomCustomer.Next(1, 34) + randomCustomer.Next(1, 30);
+            thirst = randomCustomer.Next(0, 29) + randomCustomer.Next(0, 29) + randomCustomer.Next(0, 29);
+            money = randomCustomer.Next(0, 29) + randomCustomer.Next(0, 29) + randomCustomer.Next(0, 29);
             string[] firstNames = new string[30] {"Mike", "Andrew", "Adam", "Nick", "Paul", "Margaret", "Christina", "Catelyn", "James", "Molly", "David", "Hannah", "Joshua", "Elizabeth", "Laura", "Erica", "John", "Mary", "Joe", "Jane", "Jason", "Alberta", "Eugine", "Mercedes", "Judy", "Angela", "Brittany", "Rose", "Jacob", "Leana"};
             string firstName = firstNames[randomCustomer.Next(0, 30)];
             name = firstName;

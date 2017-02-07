@@ -20,6 +20,7 @@ namespace LemonadeStand
         public int currentDay;
         public Game()
         {
+
             wallet = new Wallet();
             report = new Report();
             inventory = new Inventory();
@@ -41,7 +42,11 @@ namespace LemonadeStand
         public void StartDay()
         {
             DisplayCurrentDay();
+            weather.DisplayWeather();
             customer.RandomizeCustomers();
+            customer.GetCustomerName();
+            customer.GetCustomerThirst();
+            customer.GetCustomerMoney();
             DisplayCustomers();
             report.DisplayDailyReport(currentDay);
             EndDay();
@@ -60,11 +65,11 @@ namespace LemonadeStand
             Console.WriteLine("SELECT [1] YES");
             Console.WriteLine("SELECT [2] NO \n");
             string input = Console.ReadLine().ToLower();
-            if (input == "1" || input == "y")
+            if (input == "1" || input == "y" || input == "yes")
             {
                 DisplayRules();
             }
-            else if (input == "2" || input == "n")
+            else if (input == "2" || input == "n" || input == "no")
             {
                 Console.WriteLine("OKAY . . . NO RULES FOR YOU! \n  press any key to continue . . . \n");
                 Console.ReadKey();
@@ -120,20 +125,6 @@ namespace LemonadeStand
                 }
             }
         }
-        //public void ChooseDaysToPlay()
-        //{
-        //    Console.WriteLine("How many days would you like to play? Please enter a number [ 1 - 10 ] \n");
-        //    int daysToPlay = Int32.Parse(Console.ReadLine());
-        //    if (daysToPlay == 1 || daysToPlay == 2 || daysToPlay == 3 || daysToPlay == 4 || daysToPlay == 5 || daysToPlay == 6 || daysToPlay == 7 || daysToPlay == 8 || daysToPlay == 9 || daysToPlay == 10)
-        //    {
-        //        Console.WriteLine($"You are set to play {daysToPlay} days!");
-        //    }   
-        //    else
-        //    {
-        //        Console.WriteLine("INVALID INPUT \n");
-        //        ChooseDaysToPlay();
-        //    }
-        //}
         public void ChooseDaysToPlay()
         { 
             Console.WriteLine("\nHow many days would you like to play? Please enter a number [ 1 - 10 ] \n");
@@ -179,7 +170,7 @@ namespace LemonadeStand
                 switch (userImput)
                 {
                     case "1":
-                        weather.DisplayForcast();
+                        weather.RandomizeOvercast();
                         break;
                     case "2":
                         store.BuyFromStore();
@@ -202,7 +193,7 @@ namespace LemonadeStand
                         break;
                     case "8":
                         Console.WriteLine("ARE YOU SURE YOU WANT TO QUIT ???  \nSELECT [1] YES \nSELECT [2] NO \n");
-                        string input = Console.ReadLine().ToUpper();
+                        string input = Console.ReadLine().ToLower();
                         switch (input)
                         {
                             case "1":
@@ -227,7 +218,7 @@ namespace LemonadeStand
         }
         public int DisplayCurrentDay()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"---------- D A Y {currentDay} ---------- \n"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"\n\n---------- D A Y {currentDay} ----------"); Console.ResetColor();
             return currentDay;
         }
         public int AddDay()
@@ -243,8 +234,7 @@ namespace LemonadeStand
         }
         public void DisplayCustomers()
         {
-            foreach (Customer customer in 
-                customers)
+            foreach (Customer customer in customers)
             {
                 Console.WriteLine("Cusotmer Name: {0} Thirst: {1} Cash: {2}", customer.GetCustomerName(), customer.GetCustomerThirst(), customer.GetCustomerMoney());
             }

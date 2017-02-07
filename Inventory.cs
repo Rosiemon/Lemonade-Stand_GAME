@@ -13,7 +13,7 @@ namespace LemonadeStand
         public List<Ice> iceStock;
         public List<Cup> cupStock;
         public Dictionary<string, int> recipe;
-        double setSellingPrice;
+        double sellingPrice;
 
         public Inventory()
         {
@@ -39,26 +39,26 @@ namespace LemonadeStand
         {
             Console.WriteLine("How much do you want to sell each cup of lemonade for? \n");
             string setSellingPrice = Console.ReadLine().ToLower();
-            int sellingPrice = Int32.Parse(setSellingPrice);
-            int maxLimit = 40;
+            sellingPrice = Double.Parse(setSellingPrice);
+            double maxLimit = 40;
             try
             {
                 if (sellingPrice == 0)
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("In order to make a profit you need to set your price higher than $0.00"); Console.ResetColor();
+                    Console.BackgroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("\nIn order to make a profit you need to set your price higher than $0.00"); Console.ResetColor();
                 }
                 else if (sellingPrice >= maxLimit)
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("Are you just trying to make fun? \nLet's be a little bit more realistic with the price of your lemonade!"); Console.ResetColor();
+                    Console.BackgroundColor = ConsoleColor.DarkMagenta; Console.WriteLine("\nAre you just trying to make fun? \nLet's be a little bit more realistic with the price of your lemonade!"); Console.ResetColor();
                 }
                 else
                 {
-                    Console.WriteLine("Okay great! You are going to sell each cup of Lemonade for : ${0:0.00}", setSellingPrice);
+                    Console.WriteLine("\nOkay great! You are going to sell each cup of Lemonade for : ${0:0.00}", sellingPrice);
                 }
             }
             catch
             {
-                Console.WriteLine("you dumb. try again.");
+                Console.WriteLine("INVALID INPUT \n");
             }
          }
 
@@ -140,14 +140,14 @@ namespace LemonadeStand
             Console.WriteLine("Do you want to change your recipe? \n");
             Console.WriteLine("Select [1] YES");
             Console.WriteLine("Select [2] NO");
-            string userInput = Console.ReadLine();
-            if (userInput == "1")
+            string userInput = Console.ReadLine().ToLower();
+            if (userInput == "1" || userInput == "y" || userInput == "yes")
             {
-                ChangeRecipe();
+                ChangeRecipe(); 
             }
-            else if (userInput == "2")
+            else if (userInput == "2" || userInput == "n" || userInput == "no")
             {
-                Console.WriteLine("\nYour recipe will stay the same");
+                Console.WriteLine("\nAlright, your recipe will stay the same");
             }
             else
             {
@@ -157,9 +157,16 @@ namespace LemonadeStand
         }
         public void ChangeRecipe()
         {
-            ChangeLemonCount();
-            ChangeSugarCount();
-            ChangeIceCount();
+            if (lemonStock.Count <= 0 || sugarStock.Count <= 0 || iceStock.Count <= 0)
+            {
+                Console.WriteLine("You appear to have nothing in stock. You need to buy your items from the store first.");
+            }
+            else
+            {
+                ChangeLemonCount();
+                ChangeSugarCount();
+                ChangeIceCount();
+            }
         }
         public void ChangeLemonCount()
         {
