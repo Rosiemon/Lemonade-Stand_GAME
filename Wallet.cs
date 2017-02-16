@@ -14,9 +14,11 @@ namespace LemonadeStand
         public double totalMoneySpent;
         public double totalMoneyEarned;
         public double profitEarned;
+        Inventory inventory;
         public Wallet()
         {
             moneyInWallet = 20.00;
+            inventory = new Inventory();
         }
         public double DisplayWallet()
         {
@@ -51,9 +53,9 @@ namespace LemonadeStand
         {
             return moneySpentToday;
         }
-        public double DisplayDailyProfit(double pricePerCup, int cupsSold)
+        public double DisplayDailyProfit(int cupsSold)
         {
-            moneyEarnedToday = cupsSold * pricePerCup;
+            moneyEarnedToday = inventory.sellingPrice * cupsSold;
             return moneyEarnedToday;
         }
         public double DisplayTotalExpense(double dailyReport)   

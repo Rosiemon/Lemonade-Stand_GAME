@@ -91,7 +91,7 @@ namespace LemonadeStand
         {
             RandomizeWeather();
             SetWeather();
-            Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"\nThe actual weather for today is {actualTemperature} degrees and {actualOvercast}"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"\nThe actual weather for today is {actualTemperature} degrees and {actualOvercast} \n"); Console.ResetColor();
         }
         public void RandomizeWeather()
         {
@@ -180,6 +180,10 @@ namespace LemonadeStand
                     actualTemperature = stormy.Next(minStormy, maxStormy);
                     break;
             }
+        }
+        public void ResetWeather()
+        {
+            actualTemperature = 0;
         }
     }
 }

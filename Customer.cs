@@ -8,39 +8,83 @@ namespace LemonadeStand
 {
     public class Customer
     {
-        int thirst;
-        string name;
-        int money;
-        Random randomCustomer = new Random();
-        Inventory inventory = new Inventory();
-        Store store;
+        Weather weather = new Weather();
+        Wallet wallet;
+        Inventory inventory;
+        public int cupsSold;
+        public double moneyEarnedToday;
         public Customer()
         {
-            store = new Store(inventory);
-            thirst = 0;
-            name = "Default name";
-            money = 0;
+            wallet = new Wallet();
+            inventory = new Inventory();
         }
-        public void RandomizeCustomers()
+        public void BuyingCustomers()
         {
-            thirst = randomCustomer.Next(0, 29) + randomCustomer.Next(0, 29) + randomCustomer.Next(0, 29);
-            money = randomCustomer.Next(0, 29) + randomCustomer.Next(0, 29) + randomCustomer.Next(0, 29);
-            string[] firstNames = new string[30] {"Mike", "Andrew", "Adam", "Nick", "Paul", "Margaret", "Christina", "Catelyn", "James", "Molly", "David", "Hannah", "Joshua", "Elizabeth", "Laura", "Erica", "John", "Mary", "Joe", "Jane", "Jason", "Alberta", "Eugine", "Mercedes", "Judy", "Angela", "Brittany", "Rose", "Jacob", "Leana"};
-            string firstName = firstNames[randomCustomer.Next(0, 30)];
-            name = firstName;
-        }
-        
-        public string GetCustomerName()
-        {
-            return name;
-        }
-        public int GetCustomerThirst()
-        {
-            return thirst;
-        }
-        public int GetCustomerMoney()
-        {
-            return money;
+            if (weather.actualTemperature > 29 && weather.actualTemperature < 41)
+            {
+                Console.WriteLine("No one bought lemonade today. . .");
+                wallet.DisplayWallet();
+            }
+            else if (weather.actualTemperature > 39 && weather.actualTemperature < 46)
+            {
+                Console.WriteLine("Only 4 customers stopped by today adn bought lemonade.");
+                cupsSold = 4;
+                moneyEarnedToday = cupsSold * inventory.sellingPrice;
+                double totalBalance = moneyEarnedToday + wallet.moneyInWallet;
+                wallet.DisplayWallet();
+            }
+            else if (weather.actualTemperature > 45 && weather.actualTemperature < 56)
+            {
+                Console.WriteLine("12 customers stopped by today and bought lemonade.");
+                cupsSold = 12;
+                moneyEarnedToday = cupsSold * inventory.sellingPrice;
+                double totalBalance = moneyEarnedToday + wallet.moneyInWallet;
+                wallet.DisplayWallet();
+            }
+            else if (weather.actualTemperature > 55 && weather.actualTemperature < 66)
+            {
+                Console.WriteLine("21 customers stopped by today and bought lemonade.");
+                cupsSold = 21;
+                moneyEarnedToday = cupsSold * inventory.sellingPrice;
+                double totalBalance = moneyEarnedToday + wallet.moneyInWallet;
+                wallet.DisplayWallet();
+            }
+            else if (weather.actualTemperature > 65 && weather.actualTemperature < 76)
+            {
+                Console.WriteLine("34 customers stopped by today and bought lemonade.");
+                cupsSold = 34;
+                moneyEarnedToday = cupsSold * inventory.sellingPrice;
+                double totalBalance = moneyEarnedToday + wallet.moneyInWallet;
+                wallet.DisplayWallet();
+            }
+            else if (weather.actualTemperature > 75 && weather.actualTemperature < 85)
+            {
+                Console.WriteLine("46 customers stopped by today and bought lemonade.");
+                cupsSold = 46;
+                moneyEarnedToday = cupsSold * inventory.sellingPrice;
+                double totalBalance = moneyEarnedToday + wallet.moneyInWallet;
+                wallet.DisplayWallet();
+            }
+            else if (weather.actualTemperature > 84 && weather.actualTemperature < 94)
+            {
+                Console.WriteLine("58 customers stopped by today and bought lemonade.");
+                cupsSold = 58;
+                moneyEarnedToday = cupsSold * inventory.sellingPrice;
+                double totalBalance = moneyEarnedToday + wallet.moneyInWallet;
+                wallet.DisplayWallet();
+            }
+            else if (weather.actualTemperature > 93 && weather.actualTemperature < 101)
+            {
+                Console.WriteLine("72 customers stopped by today and bought lemonade.");
+                cupsSold = 72;
+                moneyEarnedToday = cupsSold * inventory.sellingPrice;
+                double totalBalance = moneyEarnedToday + wallet.moneyInWallet;
+                wallet.DisplayWallet();
+            }
+            else
+            {
+                Console.WriteLine("there was an error with customers . . . . .");
+            }
         }
     }
 }

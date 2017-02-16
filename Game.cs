@@ -43,11 +43,7 @@ namespace LemonadeStand
         {
             DisplayCurrentDay();
             weather.DisplayWeather();
-            customer.RandomizeCustomers();
-            customer.GetCustomerName();
-            customer.GetCustomerThirst();
-            customer.GetCustomerMoney();
-            DisplayCustomers();
+            customer.BuyingCustomers();
             report.DisplayDailyReport(currentDay);
             EndDay();
         }
@@ -187,9 +183,18 @@ namespace LemonadeStand
                         break;
                     case "6":
                         StartDay();
+                        EndDay();
                         break;
                     case "7":
-
+                        try
+                        {
+                            Console.WriteLine("We are trying to save your data . . . . . . . . . .");
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Oops... There was an error saving your data.");
+                            DisplayMenu();
+                        }
                         break;
                     case "8":
                         Console.WriteLine("ARE YOU SURE YOU WANT TO QUIT ???  \nSELECT [1] YES \nSELECT [2] NO \n");
@@ -218,26 +223,17 @@ namespace LemonadeStand
         }
         public int DisplayCurrentDay()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow; Console.WriteLine($"\n\n---------- D A Y {currentDay} ----------"); Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("-------------------------------------------");
+            Console.WriteLine($"\n\n-------------- D A Y {currentDay} ---------");
+            Console.WriteLine("-------------------------------------------");
+            Console.ResetColor();
             return currentDay;
         }
         public int AddDay()
         {
             currentDay += 1;
             return currentDay;
-        }
-        public Customer CreateCustomer()
-        {
-            Customer customer = new Customer();
-            customer.RandomizeCustomers();
-            return customer;
-        }
-        public void DisplayCustomers()
-        {
-            foreach (Customer customer in customers)
-            {
-                Console.WriteLine("Cusotmer Name: {0} Thirst: {1} Cash: {2}", customer.GetCustomerName(), customer.GetCustomerThirst(), customer.GetCustomerMoney());
-            }
         }
         public void EndDay()
         {

@@ -13,7 +13,7 @@ namespace LemonadeStand
         public List<Ice> iceStock;
         public List<Cup> cupStock;
         public Dictionary<string, int> recipe;
-        double sellingPrice;
+        public double sellingPrice;
 
         public Inventory()
         {
@@ -21,10 +21,10 @@ namespace LemonadeStand
             sugarStock = new List<Sugar> { };
             iceStock = new List<Ice> { };
             cupStock = new List<Cup> { };
-            recipe = new Dictionary<string, int>();
-            recipe.Add("lemons", 1);
-            recipe.Add("sugar", 1);
-            recipe.Add("ice", 1);
+            recipe = new Dictionary<string, int> {
+                { "lemons", 1 },
+                {"sugar", 1 },
+                {"ice", 1 } };
         }
 
         public void DisplayInventory()
@@ -170,7 +170,8 @@ namespace LemonadeStand
         }
         public void ChangeLemonCount()
         {
-            Console.ForegroundColor = ConsoleColor.Cyan; Console.WriteLine("How many lemons would you like for each cup?");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("How many lemons would you like for each cup?");
             int lemons = Int32.Parse(Console.ReadLine());
             if (lemons > lemonStock.Count)
             {
@@ -178,7 +179,7 @@ namespace LemonadeStand
             }
             else if (lemons <= lemonStock.Count)
             {
-                recipe.Add("lemons", lemons); Console.ResetColor();
+                recipe["lemons"] = lemons; Console.ResetColor();
             }
             else
             {
@@ -196,7 +197,7 @@ namespace LemonadeStand
             }
             else if (sugar <= sugarStock.Count)
             {
-                recipe.Add("sugar", sugar); Console.ResetColor();
+                recipe["sugar"] = sugar; Console.ResetColor();
             }
             else
             {
@@ -214,7 +215,7 @@ namespace LemonadeStand
             }
             else if (ice <= iceStock.Count)
             {
-                recipe.Add("ice", ice); Console.ResetColor();
+                recipe["ice"] = ice; Console.ResetColor();
             }
             else
             {
